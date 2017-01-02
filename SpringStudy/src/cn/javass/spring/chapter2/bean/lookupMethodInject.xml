@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+	
+	<bean id="prototypePrinter"
+	class="cn.javass.spring.chapter2.bean.Printer" scope="prototype"/>
+	
+	<bean id="singletonPrinter"
+	class="cn.javass.spring.chapter2.bean.Printer" scope="singleton"/>
+	
+	<bean id="replacer" class="cn.javass.spring.chapter2.bean.PrinterReplace" />
+	
+	<bean id="printer" class="cn.javass.spring.chapter2.bean.Printer">
+	<replaced-method name="print" replacer="replacer">
+	<arg-type>java.lang.String</arg-type>
+	</replaced-method>
+	
+	</bean>
+	
+	
+	<bean id="helloWorld_4_Impl_Singleton" class="cn.javass.spring.chapter2.bean.HelloWorld_4_Impl"
+	scope="singleton"
+	p:printer-ref="prototypePrinter"
+	>
+	<lookup-method name="createPrototypePrinter" bean="prototypePrinter"/>
+	<lookup-method name="createSingletonPrinter" bean="singletonPrinter"/>
+	</bean>
+	
+	
+	<bean id="helloWorld_4_Impl_Prototype" class="cn.javass.spring.chapter2.bean.HelloWorld_4_Impl"
+	scope="prototype"
+	p:printer-ref="prototypePrinter"
+	>
+	<lookup-method name="createPrototypePrinter" bean="prototypePrinter"/>
+	<lookup-method name="createSingletonPrinter" bean="singletonPrinter"/>
+	</bean>
+	
+		<bean id="helloWorld_4_Impl_Prototype_Replace" class="cn.javass.spring.chapter2.bean.HelloWorld_4_Impl"
+	scope="prototype"
+	p:printer-ref="prototypePrinter"
+	>
+	</bean>
+	
+</beans>

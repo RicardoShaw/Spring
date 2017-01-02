@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+
+	<!-- 参数索引注入 -->
+	<bean id="helloByIndex" class="cn.javass.spring.chapter2.HelloWorld_2_Impl">
+	<!-- HelloWorld_2_Impl(int index,String message) 0->index 1->message -->
+	<constructor-arg index="0" value="1"></constructor-arg>
+	<constructor-arg index="1" value="Index inject HelloWorld_2_Impl Hello Spring！"></constructor-arg>
+	</bean>
+	
+	<!-- 参数类型注入 -->
+	<bean id="helloByType" class="cn.javass.spring.chapter2.HelloWorld_2_Impl">
+	<!-- HelloWorld_2_Impl(int index,String message)  -->
+	<constructor-arg type="int" value="2"></constructor-arg>
+	<constructor-arg type="java.lang.String"  value="Type inject HelloWorld_2_Impl Hello Spring！"></constructor-arg>
+	</bean>
+	
+	<!-- 参数名注入 -->
+	<bean id="helloByName" class="cn.javass.spring.chapter2.HelloWorld_2_Impl">
+	<!-- HelloWorld_2_Impl(int index,String message)  -->
+	<constructor-arg name="index" value="3"></constructor-arg>
+	<constructor-arg name="message"  value="ArgName inject HelloWorld_2_Impl Hello Spring！"></constructor-arg>
+	</bean>
+	
+	<!-- Setter注入 -->
+	<bean id="helloWorld_3" class="cn.javass.spring.chapter2.HelloWorld_3_Impl"
+	p:index="1"
+	p:message="Setter Inject Hello World"
+	p:flag="true"
+	/>
+	
+
+	
+	<bean id="message" class="java.lang.String">
+	<constructor-arg index="0" value="Bean message Value HelloWorld"></constructor-arg>
+	</bean>
+	<!-- Setter Bean注入 -->
+	
+	<bean id="HelloWorld_3ByBeanInject" class="cn.javass.spring.chapter2.HelloWorld_3_Impl"
+	p:index="1"
+	p:message-ref="message"
+	p:flag="true"
+	/>
+	
+	
+
+	
+	
+</beans>
